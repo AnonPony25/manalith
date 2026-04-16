@@ -37,6 +37,7 @@ const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   // Lazy import to avoid circular dependency at module init time
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { useAuthStore } = require('@/store/authStore')
   const accessToken: string | null = useAuthStore.getState().accessToken
   if (accessToken && config.headers) {
@@ -71,6 +72,7 @@ axiosInstance.interceptors.response.use(
       isRefreshing = true
 
       try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const { useAuthStore } = require('@/store/authStore')
         const refreshed = await useAuthStore.getState().refreshToken()
 

@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Modal } from '@/components/ui/Modal'
 import { Badge } from '@/components/ui/Badge'
-import { Spinner } from '@/components/ui/Spinner'
 import { useToast } from '@/components/ui/useToast'
 
 // ---------------------------------------------------------------------------

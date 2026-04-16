@@ -38,6 +38,7 @@ export function DeckImportModal({ isOpen, onClose, onImported }: DeckImportModal
       setErrors({})
       importMutation.reset()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
   const importMutation = useMutation({

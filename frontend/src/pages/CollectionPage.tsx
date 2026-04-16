@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Badge } from '@/components/ui/Badge'
 import { Spinner } from '@/components/ui/Spinner'
-import { useToast } from '@/components/ui/useToast'
 
 // ---------------------------------------------------------------------------
 // Color filter config
@@ -63,7 +62,6 @@ function buildQuery(name: string, colors: string[], type: string): string {
 // ---------------------------------------------------------------------------
 
 export function CollectionPage() {
-  const toast = useToast()
 
   // Search state
   const [nameQuery, setNameQuery] = useState('')

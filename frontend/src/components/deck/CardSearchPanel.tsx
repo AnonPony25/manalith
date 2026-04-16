@@ -17,7 +17,7 @@ function Spinner() {
   )
 }
 
-export function CardSearchPanel({ onAddCard, format }: CardSearchPanelProps) {
+export function CardSearchPanel({ onAddCard, format: _format }: CardSearchPanelProps) {
   const [inputValue, setInputValue] = useState('')
   const [debouncedQuery, setDebouncedQuery] = useState('')
   const [page, setPage] = useState(1)
