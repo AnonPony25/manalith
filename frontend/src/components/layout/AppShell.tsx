@@ -1,10 +1,23 @@
-import type { ReactNode } from 'react'
+import React from 'react'
+import { Navbar } from './Navbar'
 
-/**
- * AppShell
- * Top-level layout wrapper providing persistent nav, sidebar, and footer.
- * Placeholder — will be fleshed out in a follow-up.
- */
-export function AppShell({ children }: { children: ReactNode }) {
-  return <div className="app-shell min-h-screen flex flex-col">{children}</div>
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+interface AppShellProps {
+  children: React.ReactNode
+}
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
+export const AppShell: React.FC<AppShellProps> = ({ children }) => {
+  return (
+    <div className="flex min-h-screen flex-col bg-zinc-950 text-zinc-100">
+      <Navbar />
+      <main className="flex-1 overflow-y-auto">{children}</main>
+    </div>
+  )
 }
