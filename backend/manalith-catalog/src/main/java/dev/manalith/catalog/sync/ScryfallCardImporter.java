@@ -1,6 +1,7 @@
 package dev.manalith.catalog.sync;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.manalith.catalog.model.CardPrinting;
 import dev.manalith.catalog.model.CardRuling;
@@ -70,7 +71,7 @@ public class ScryfallCardImporter {
         int errors = 0;
         List<CardPrinting> buffer = new ArrayList<>(CARD_BATCH_SIZE);
 
-        try (com.fasterxml.jackson.core.MappingIterator<Map<String, Object>> it =
+        try (MappingIterator<Map<String, Object>> it =
                      objectMapper.readerFor(new TypeReference<Map<String, Object>>() {})
                              .readValues(jsonFile.toFile())) {
 
@@ -139,7 +140,7 @@ public class ScryfallCardImporter {
         int errors = 0;
         List<CardRuling> buffer = new ArrayList<>(CARD_BATCH_SIZE);
 
-        try (com.fasterxml.jackson.core.MappingIterator<Map<String, Object>> it =
+        try (MappingIterator<Map<String, Object>> it =
                      objectMapper.readerFor(new TypeReference<Map<String, Object>>() {})
                              .readValues(jsonFile.toFile())) {
 
