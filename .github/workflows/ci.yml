@@ -37,9 +37,12 @@ jobs:
       - name: Build non-Forge modules
         # manalith-forge-adapter and manalith-game depend on a locally built Forge JAR
         # which is not available in CI. We build only the modules that have no Forge dependency.
+        # -f backend/pom.xml sets the reactor root to backend/, so -pl uses bare module names
+        # (no backend/ prefix) matching the <module> entries in backend/pom.xml.
         run: |
           mvn clean verify --batch-mode \
-            -pl backend/manalith-common,backend/manalith-auth,backend/manalith-catalog,backend/manalith-deck,backend/manalith-collection,backend/manalith-lobby,backend/manalith-match-history,backend/manalith-notifications \
+            -f backend/pom.xml \
+            -pl manalith-common,manalith-auth,manalith-catalog,manalith-deck,manalith-collection,manalith-lobby,manalith-match-history,manalith-notifications \
             -am
 
       - name: Upload test results
