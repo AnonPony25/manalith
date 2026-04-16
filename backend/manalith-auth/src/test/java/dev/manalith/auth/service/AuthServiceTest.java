@@ -53,8 +53,10 @@ class AuthServiceTest {
                 jwtService
         );
 
-        // Default stub: save returns the argument unchanged (with an ID set)
-        when(userRepository.save(any(User.class))).thenAnswer(inv -> {
+        // Default stubs: save() returns the argument unchanged (with an ID set).
+        // Marked lenient because not every test exercises every repository —
+        // Mockito strict mode would otherwise raise UnnecessaryStubbingException.
+        lenient().when(userRepository.save(any(User.class))).thenAnswer(inv -> {
             User u = inv.getArgument(0);
             if (u.getId() == null) {
                 // Simulate DB-generated UUID
@@ -67,9 +69,9 @@ class AuthServiceTest {
             }
             return u;
         });
-        when(oAuthIdentityRepository.save(any(OAuthIdentity.class)))
+        lenient().when(oAuthIdentityRepository.save(any(OAuthIdentity.class)))
                 .thenAnswer(inv -> inv.getArgument(0));
-        when(refreshTokenRepository.save(any(RefreshToken.class)))
+        lenient().when(refreshTokenRepository.save(any(RefreshToken.class)))
                 .thenAnswer(inv -> inv.getArgument(0));
     }
 
