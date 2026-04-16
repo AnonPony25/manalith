@@ -1,4 +1,3 @@
-import React from 'react'
 import { DeckStatsDTO } from '@/types/deck'
 
 interface DeckStatsPanelProps {

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, type ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
-import { Modal } from '@/components/ui/Modal'
-import { Badge } from '@/components/ui/Badge'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Modal from '@/components/ui/Modal'
+import Badge from '@/components/ui/Badge'
 import { useToast } from '@/components/ui/useToast'
 
 // ---------------------------------------------------------------------------
@@ -135,7 +135,7 @@ export function LobbyPage() {
                 label="Room Code"
                 placeholder="ABC123"
                 value={roomCode}
-                onChange={(e) => setRoomCode(e.target.value.toUpperCase().slice(0, 6))}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setRoomCode(e.target.value.toUpperCase().slice(0, 6))}
                 className="font-mono tracking-widest uppercase"
               />
             </div>
@@ -158,7 +158,7 @@ export function LobbyPage() {
             <Input
               placeholder="Search rooms..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
               leftIcon={
                 <svg className="w-4 h-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -227,7 +227,7 @@ export function LobbyPage() {
             label="Room Name"
             placeholder="e.g. Friday Night Magic"
             value={createForm.name}
-            onChange={(e) => setCreateForm((f) => ({ ...f, name: e.target.value }))}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setCreateForm((f) => ({ ...f, name: e.target.value }))}
           />
 
           <div>
@@ -235,7 +235,7 @@ export function LobbyPage() {
             <select
               className="w-full bg-zinc-800 border border-zinc-700 rounded-md text-zinc-100 px-3 py-2 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 focus:outline-none"
               value={createForm.format}
-              onChange={(e) => setCreateForm((f) => ({ ...f, format: e.target.value }))}
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => setCreateForm((f) => ({ ...f, format: e.target.value }))}
             >
               {FORMATS.map((fmt) => (
                 <option key={fmt} value={fmt}>{fmt}</option>
@@ -275,7 +275,7 @@ export function LobbyPage() {
               type="password"
               placeholder="Room password"
               value={createForm.password}
-              onChange={(e) => setCreateForm((f) => ({ ...f, password: e.target.value }))}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setCreateForm((f) => ({ ...f, password: e.target.value }))}
             />
           )}
 

@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, type ChangeEvent } from 'react'
 import { cardApi } from '@/api/cardApi'
 import { CardPrinting } from '@/types/card'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
-import { Badge } from '@/components/ui/Badge'
-import { Spinner } from '@/components/ui/Spinner'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Badge from '@/components/ui/Badge'
+import Spinner from '@/components/ui/Spinner'
 
 // ---------------------------------------------------------------------------
 // Color filter config
@@ -147,7 +147,7 @@ export function CollectionPage() {
                 label="Card Name"
                 placeholder="Search cards..."
                 value={nameQuery}
-                onChange={(e) => setNameQuery(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setNameQuery(e.target.value)}
                 leftIcon={
                   <svg className="w-4 h-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

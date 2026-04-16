@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { CardPrinting } from '@/types/card'
 
 interface CardSearchResultProps {
