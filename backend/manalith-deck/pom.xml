@@ -20,5 +20,15 @@
             <groupId>dev.manalith</groupId>
             <artifactId>manalith-catalog</artifactId>
         </dependency>
+        <!-- DeckController uses @RestController, ResponseEntity, MediaType -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- DeckController reads SecurityContextHolder for the authenticated user -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 </project>
