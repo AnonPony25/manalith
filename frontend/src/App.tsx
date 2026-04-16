@@ -1,18 +1,21 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { HomePage }        from '@/pages/HomePage'
-import { LoginPage }       from '@/pages/LoginPage'
-import { LobbyPage }       from '@/pages/LobbyPage'
-import { GamePage }        from '@/pages/GamePage'
-import { DeckBuilderPage } from '@/pages/DeckBuilderPage'
-import { CollectionPage }  from '@/pages/CollectionPage'
-import { RequireAuth }     from '@/components/shared/RequireAuth'
+import { HomePage }          from '@/pages/HomePage'
+import { LoginPage }         from '@/pages/LoginPage'
+import { AuthCallbackPage }  from '@/pages/AuthCallbackPage'
+import { LobbyPage }         from '@/pages/LobbyPage'
+import { GamePage }          from '@/pages/GamePage'
+import { DeckBuilderPage }   from '@/pages/DeckBuilderPage'
+import { CollectionPage }    from '@/pages/CollectionPage'
+import { RequireAuth }       from '@/components/shared/RequireAuth'
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/"           element={<HomePage />} />
-        <Route path="/login"      element={<LoginPage />} />
+        <Route path="/"                element={<HomePage />} />
+        <Route path="/login"           element={<LoginPage />} />
+        {/* OAuth2 callback — processes tokens from the backend redirect */}
+        <Route path="/auth/callback"   element={<AuthCallbackPage />} />
         <Route element={<RequireAuth />}>
           <Route path="/lobby"         element={<LobbyPage />} />
           <Route path="/game/:roomId"  element={<GamePage />} />

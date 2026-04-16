@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import { useAuthStore } from '@/store/authStore'
 
 /**
  * RequireAuth
  * Wraps protected routes. Redirects unauthenticated users to /login.
- * TODO: read auth state from authStore (Zustand) or cookie check.
+ * Auth state is read from the Zustand authStore.
  */
 export function RequireAuth() {
-  const isAuthenticated = false // TODO: replace with actual auth check
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />
 }

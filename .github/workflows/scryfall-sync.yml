@@ -1,0 +1,38 @@
+name: Scryfall Sync Check
+
+# NOTE: The actual Scryfall bulk-data sync is performed at runtime by the Spring
+# scheduled job (ScryfallBulkSyncJob). This workflow exists only as a lightweight
+# daily reminder / audit entry in the Actions log so that ops can confirm the
+# runtime job is expected to have run. No network requests to Scryfall are made here.
+
+on:
+  schedule:
+    # 6:00 AM UTC daily — fires shortly before the Spring cron job window
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync-reminder:
+    name: Scryfall Sync Reminder
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print reminder
+        run: |
+          echo "=========================================="
+          echo "  Scryfall Sync Reminder"
+          echo "=========================================="
+          echo ""
+          echo "The Scryfall bulk-data sync is handled by the"
+          echo "ScryfallBulkSyncJob Spring @Scheduled task running"
+          echo "inside the manalith-catalog service."
+          echo ""
+          echo "Expected schedule: nightly at 03:00 UTC (configurable"
+          echo "via SCRYFALL_SYNC_CRON environment variable)."
+          echo ""
+          echo "If the runtime service is healthy, this reminder can"
+          echo "be safely ignored. Check application logs or the"
+          echo "ScryfallBulkSyncJob metrics endpoint for status."
+          echo ""
+          echo "Date: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "=========================================="
