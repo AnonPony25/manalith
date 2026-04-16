@@ -1,0 +1,67 @@
+# Manalith — Docker Compose (development)
+# Starts: PostgreSQL, Redis, and optionally the Spring Boot backend
+# Usage: docker compose up -d
+
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: manalith-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       manalith
+      POSTGRES_USER:     manalith
+      POSTGRES_PASSWORD: manalith
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U manalith"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: manalith-redis
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Uncomment to run the backend in Docker during dev
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: manalith-backend
+  #   restart: unless-stopped
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   environment:
+  #     SPRING_PROFILES_ACTIVE: dev
+  #     POSTGRES_URL: jdbc:postgresql://postgres:5432/manalith
+  #     POSTGRES_USER: manalith
+  #     POSTGRES_PASSWORD: manalith
+  #     REDIS_HOST: redis
+  #     JWT_SECRET: change-me-in-dev-only
+  #   ports:
+  #     - "8080:8080"
+
+volumes:
+  postgres_data:
+  redis_data:

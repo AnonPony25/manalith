@@ -1,0 +1,66 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "docker: start infra (postgres + redis)",
+      "type": "shell",
+      "command": "docker compose up -d postgres redis",
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "docker: stop infra",
+      "type": "shell",
+      "command": "docker compose down",
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build"
+    },
+    {
+      "label": "backend: build (skip tests)",
+      "type": "shell",
+      "command": "mvn clean install -DskipTests",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "build",
+      "problemMatcher": "$maven"
+    },
+    {
+      "label": "backend: test",
+      "type": "shell",
+      "command": "mvn test",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "test",
+      "problemMatcher": "$maven"
+    },
+    {
+      "label": "frontend: install deps",
+      "type": "shell",
+      "command": "npm install",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "group": "build"
+    },
+    {
+      "label": "frontend: dev server",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": { "regexp": "^(.*)$", "file": 1, "location": 2, "message": 3 },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Starting Vite.*$",
+          "endsPattern": "^.*Local:.*$"
+        }
+      }
+    },
+    {
+      "label": "scripts: build forge engine",
+      "type": "shell",
+      "command": "scripts/build-forge.bat",
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "windows": { "command": "scripts\\build-forge.bat" }
+    }
+  ]
+}

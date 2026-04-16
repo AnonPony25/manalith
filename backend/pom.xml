@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ══════════════════════════════════════════
+         Parent: Spring Boot BOM
+         ══════════════════════════════════════════ -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.0</version>
+        <relativePath/>
+    </parent>
+
+    <!-- ══════════════════════════════════════════
+         Root POM coordinates
+         ══════════════════════════════════════════ -->
+    <groupId>dev.manalith</groupId>
+    <artifactId>manalith-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Manalith :: Parent</name>
+    <description>Open-source multiplayer MTG platform — root Maven POM</description>
+    <url>https://github.com/manalith/manalith</url>
+    <inceptionYear>2026</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License v3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+        </license>
+    </licenses>
+
+    <!-- ══════════════════════════════════════════
+         Modules
+         ══════════════════════════════════════════ -->
+    <modules>
+        <module>manalith-common</module>
+        <module>manalith-forge-adapter</module>
+        <module>manalith-auth</module>
+        <module>manalith-catalog</module>
+        <module>manalith-deck</module>
+        <module>manalith-collection</module>
+        <module>manalith-lobby</module>
+        <module>manalith-game</module>
+        <module>manalith-match-history</module>
+        <module>manalith-notifications</module>
+        <module>manalith-api</module>         <!-- entry point / application module -->
+    </modules>
+
+    <!-- ══════════════════════════════════════════
+         Properties
+         ══════════════════════════════════════════ -->
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Dependency versions (override Spring Boot BOM where needed) -->
+        <lombok.version>1.18.32</lombok.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <jjwt.version>0.12.5</jjwt.version>
+        <flyway.version>10.10.0</flyway.version>
+        <testcontainers.version>1.19.8</testcontainers.version>
+        <jacoco.version>0.8.12</jacoco.version>
+
+        <!-- Forge version — match whatever local build is published to .m2 -->
+        <forge.version>LOCAL-SNAPSHOT</forge.version>
+    </properties>
+
+    <!-- ══════════════════════════════════════════
+         Dependency Management (non-Spring Boot BOM)
+         ══════════════════════════════════════════ -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Internal modules -->
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-forge-adapter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-catalog</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-deck</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-collection</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-lobby</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-game</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-match-history</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.manalith</groupId>
+                <artifactId>manalith-notifications</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Forge engine modules (built locally) -->
+            <dependency>
+                <groupId>org.cardforge</groupId>
+                <artifactId>forge-core</artifactId>
+                <version>${forge.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.cardforge</groupId>
+                <artifactId>forge-game</artifactId>
+                <version>${forge.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.cardforge</groupId>
+                <artifactId>forge-ai</artifactId>
+                <version>${forge.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!-- MapStruct -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <!-- Testcontainers BOM -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- ══════════════════════════════════════════
+         Common dependencies for all modules
+         ══════════════════════════════════════════ -->
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- ══════════════════════════════════════════
+         Build plugins
+         ══════════════════════════════════════════ -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

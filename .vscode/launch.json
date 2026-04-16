@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Manalith Backend (Spring Boot)",
+      "request": "launch",
+      "mainClass": "dev.manalith.ManalithApplication",
+      "projectName": "manalith-api",
+      "args": "--spring.profiles.active=dev",
+      "env": {
+        "SPRING_PROFILES_ACTIVE": "dev"
+      }
+    },
+    {
+      "type": "node",
+      "name": "Manalith Frontend (Vite Dev)",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/frontend",
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack (Backend + Frontend)",
+      "configurations": [
+        "Manalith Backend (Spring Boot)",
+        "Manalith Frontend (Vite Dev)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+# ──────────────────────────────────────────────
+# Manalith .gitignore
+# ──────────────────────────────────────────────
+
+# Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.mvn/wrapper/maven-wrapper.jar
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Java
+hs_err_pid*
+replay_pid*
+
+# Spring Boot
+HELP.md
+
+# Node / npm / yarn / pnpm
+node_modules/
+dist/
+build/
+.vite/
+*.local
+.pnp
+.pnp.js
+
+# Vite
+vite.config.ts.timestamp-*
+
+# Environment files — NEVER commit real secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# VS Code (keep workspace settings, ignore personal settings)
+.vscode/settings.json
+.vscode/*.code-workspace
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Logs
+*.log
+logs/
+
+# Docker override files with secrets
+docker-compose.override.yml
+
+# Generated Scryfall bulk data cache
+data/scryfall/
+
+# Test output
+surefire-reports/
+failsafe-reports/
+*.html.xml
+
+# Coverage
+.jacoco/
+jacoco.exec
+
+# Forge submodule build artifacts (if using submodule)
+forge/target/
+
+# IDE scratch files
+scratch/
+tmp/

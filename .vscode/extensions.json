@@ -1,0 +1,30 @@
+{
+  "recommendations": [
+    // Java / Spring Boot
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-spring-boot-dashboard",
+    "pivotal.vscode-spring-boot",
+    "vscjava.vscode-maven",
+
+    // TypeScript / React
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "dsznajder.es7-react-js-snippets",
+
+    // Database
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg",
+    "cweijan.vscode-redis-client",
+
+    // Docker
+    "ms-azuretools.vscode-docker",
+
+    // General dev quality
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "EditorConfig.EditorConfig",
+    "GitHub.copilot"
+  ]
+}
