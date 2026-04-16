@@ -5,6 +5,7 @@ import { AuthCallbackPage }  from '@/pages/AuthCallbackPage'
 import { LobbyPage }         from '@/pages/LobbyPage'
 import { GamePage }          from '@/pages/GamePage'
 import { DeckBuilderPage }   from '@/pages/DeckBuilderPage'
+import { DeckEditorPage }    from '@/pages/DeckEditorPage'
 import { CollectionPage }    from '@/pages/CollectionPage'
 import { RequireAuth }       from '@/components/shared/RequireAuth'
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/lobby"         element={<LobbyPage />} />
           <Route path="/game/:roomId"  element={<GamePage />} />
           <Route path="/decks"         element={<DeckBuilderPage />} />
+          <Route path="/decks/:id"     element={<DeckEditorPage />} />
           <Route path="/collection"    element={<CollectionPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
